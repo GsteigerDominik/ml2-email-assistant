@@ -1,0 +1,5 @@
+Input
+{email_text}
+Output
+{'ACTION':'EXAMPLE_ACTION'}
+Nur die JSON-Antwort zurückgeben, ohne weiteren Kontext.

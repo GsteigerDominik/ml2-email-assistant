@@ -1,0 +1,12 @@
+Input Email:
+{email_text}
+Output:
+{
+    "Betreff": "Betreff des Termins",
+    "Datum": "Datum im Format DD.MM.YYYY",
+    "Uhrzeit": "Zeit des Termins im Format HH:MM",
+    "Dauer": "Dauer des Termins im Format HH:MM",
+    "Ort": "Ort",
+    "Beschreibung": "Beschreibung"
+}
+Nur die JSON-Antwort zurückgeben, ohne weiteren Kontext.

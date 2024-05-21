@@ -1,0 +1,11 @@
+Input
+{email_text}
+Output
+{
+ 'email_response':'Die generierte Antwort auf die Email',
+ 'questions':[
+    'Beispiel Frage an den User',
+    'Beispiel Frage zum Inhalt 2'
+ ]
+}
+Nur die JSON-Antwort zurückgeben, ohne weiteren Kontext.
