@@ -1,0 +1,31 @@
+Erstellen Sie jeweils fünf E-Mails im ".msg" Format für die folgenden Aktionen, die von einem automatisierten E-Mail-Assistenten erkannt werden können:
+
+DELETE_MAIL - Diese E-Mails sollen gelöscht werden, z.B. Spam-Nachrichten oder irrelevante Werbung.
+ANSWER_MAIL - Diese E-Mails benötigen eine Antwort, z.B. Anfragen von Kunden oder Kollegen.
+CREATE_MEETING - Diese E-Mails enthalten Termininformationen, die zu einem Kalendereintrag führen sollen.
+USER_ACTION_NEEDED - Diese E-Mails erfordern eine Handlung des Nutzers, z.B. Genehmigungen oder wichtige Aufgaben.
+READ_MAIL - Diese E-Mails sind rein informativ und sollten gelesen werden, z.B. Newsletter oder interne Updates.
+Beispiele für die E-Mails:
+
+DELETE_MAIL:
+
+Betreff: "Gewinnen Sie jetzt einen iPhone!"
+Inhalt: "Herzlichen Glückwunsch! Sie haben die Chance, ein brandneues iPhone zu gewinnen. Klicken Sie hier, um teilzunehmen."
+ANSWER_MAIL:
+
+Betreff: "Anfrage zu Projekt X"
+Inhalt: "Hallo, ich habe eine Frage zum Projekt X. Könnten Sie mir bitte die neuesten Updates und Informationen zukommen lassen?"
+CREATE_MEETING:
+
+Betreff: "Einladung zum Meeting am 15. Juni"
+Inhalt: "Bitte nehmen Sie an unserem Meeting am 15. Juni um 10:00 Uhr teil. Thema: Projektfortschritt."
+USER_ACTION_NEEDED:
+
+Betreff: "Genehmigung für Budgetanpassung erforderlich"
+Inhalt: "Bitte überprüfen und genehmigen Sie die vorgeschlagene Budgetanpassung für das nächste Quartal."
+READ_MAIL:
+
+Betreff: "Newsletter Mai 2024"
+Inhalt: "Sehr geehrter Kunde, hier finden Sie unseren neuesten Newsletter mit wichtigen Informationen und Updates."
+Bitte generieren Sie diese E-Mails im ".msg" Format, sodass sie vom automatisierten E-Mail-Assistenten getestet werden können.
+

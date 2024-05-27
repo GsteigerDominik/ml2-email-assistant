@@ -1,5 +1,13 @@
 Input
 {email_text}
+
+Deine Antwort
+{context}
+
+Das Feedback des Users
+{feedback}
+
+
 Output
 {
  'email_response':'Die generierte Antwort auf die Email',

@@ -1,0 +1,8 @@
+Schreibe einen Prompt für GPT 4o.
+er soll verschiedene Emails im ".msg" format generieren um einen automatisierten Email assistenten zu testen. Der Assistent kennt folgende Typen von aktionen:
+- DELETE_MAIL (Das Mail soll gelöscht werden, beispielsweise Spam)
+- ANSWER_MAIL  (Das Mail soll beantwortet werden, beispielsweise Anfragen)
+- CREATE_MEETING (Im Mail sind Termininformationen vorhanden, welche zu einem Kalender eintrag führen sollen)
+- USER_ACTION_NEEDED (Aufgrund dieses emails muss der User handeln)
+- READ_MAIL (Das Mail ist rein Informativ und sollte gelesen werden)
+Er solle je 5 Dateien erstellen

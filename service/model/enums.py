@@ -1,0 +1,15 @@
+from enum import Enum
+
+
+class State(Enum):
+    INITIAL_STATE = 0
+    EMAIL_RECEIVED = 1
+    FINE_TUNING = 2
+
+
+class Action(Enum):
+    DELETE_MAIL = "DELETE_MAIL"
+    ANSWER_MAIL = "ANSWER_MAIL"
+    CREATE_MEETING = "CREATE_MEETING"
+    USER_ACTION_NEEDED = "USER_ACTION_NEEDED"
+    READ_MAIL = "READ_MAIL"

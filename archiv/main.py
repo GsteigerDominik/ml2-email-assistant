@@ -1,9 +1,9 @@
 import json
 
-from email_assistant.agents.classifier_agent.classifier import classify_email
-from email_assistant.agents.answer_agent.answer import answer_email
-from email_assistant.util.file_helper import load_email
-from email_assistant.agents.meeting_agent.meeting import create_meeting_suggestion
+from zz_email_assistant.agents.classifier_agent.classifier import classify_email
+from zz_email_assistant.agents.answer_agent.answer import answer_email
+from zz_email_assistant.util.file_helper import load_email
+from zz_email_assistant.agents.meeting_agent.meeting import create_meeting_suggestion
 
 def main():
     email_content = load_email("information_mail.msg.msg")
