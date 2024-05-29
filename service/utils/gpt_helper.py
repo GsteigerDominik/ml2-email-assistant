@@ -1,8 +1,11 @@
+import os
+
 from openai import OpenAI
 
 
 class GptHelper:
-    client = OpenAI(api_key="REPLACE ME")
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    client = OpenAI(api_key=openai_api_key)
     model = "gpt-3.5-turbo"
 
     def send_prompt(self, system_content, user_content):

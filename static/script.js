@@ -8,7 +8,21 @@ function handleFileUpload() {
     if (file) {
         const formData = new FormData();
         formData.append('file', file);
-        appendMessage("user", file.name)
+        fetch('http://127.0.0.1:5000/parse-email', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    console.log(data)
+                    appendEmail(data.response);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+
         fetch('http://127.0.0.1:5000/upload-email', {
             method: 'POST',
             body: formData
@@ -34,6 +48,8 @@ function appendMessage(sender, message) {
     contentElement.classList.add('content');
     if (message['ACTION'] === "CREATE_MEETING") {
         contentElement.innerHTML = prepareHtmlForMeeting(message)
+    } else if(message['ACTION'] === "ANSWER_MAIL"){
+        contentElement.innerHTML = prepareHtmlForAnswer(message)
     } else {
         contentElement.textContent = message;
     }
@@ -42,14 +58,32 @@ function appendMessage(sender, message) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+function appendEmail(email_content) {
+    const chatMessages = document.getElementById('chat-messages');
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', 'user');
+    const contentElement = document.createElement('div');
+    contentElement.classList.add('content');
+    contentElement.innerHTML= `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+            <h2>Email</h2>
+            <p><strong>Betreff:</strong> ${email_content.Subject}</p>
+            <p><strong>Datum:</strong> ${email_content.Date}</p>
+            <p><strong>From:</strong> ${email_content.From}</p>
+            <p><strong>To:</strong> ${email_content.To}</p>
+            <p><strong>Content:</strong> ${email_content.Body}</p>
+        </div>
+    `;
+    messageElement.appendChild(contentElement);
+    chatMessages.appendChild(messageElement);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
 function prepareHtmlForMeeting(message) {
     const content = JSON.parse(message['CONTENT']);
-    // Create the start and end datetime strings in the correct format (YYYYMMDDTHHmmss)
-    // Parse date and time correctly
     const startDate = new Date(`${content.Datum}T${content.Uhrzeit}:00`);
     const endDate = new Date(startDate.getTime() + 60 * 60 * 1000); // add one hour
 
-    // Format dates to the correct ICS format (YYYYMMDDTHHmmss)
     const formatDate = (date) => {
         const year = date.getUTCFullYear().toString().padStart(4, '0');
         const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
@@ -97,6 +131,17 @@ function prepareHtmlForMeeting(message) {
     `;
 }
 
+function prepareHtmlForAnswer(message) {
+    console.log('HEY',message['CONTENT'])
+    const content = JSON.parse(message['CONTENT']);
+
+    return `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+            <p><strong>Antwort:</strong> ${content.email_response}</p>
+            <p><strong>Offene Fragen:</strong> ${content.questions}</p>
+        </div>
+    `;
+}
 function switchToChatInput() {
     document.getElementById('file-input').style.display = 'none';
     document.getElementById('message-input').style.display = 'block';

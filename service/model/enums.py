@@ -13,3 +13,13 @@ class Action(Enum):
     CREATE_MEETING = "CREATE_MEETING"
     USER_ACTION_NEEDED = "USER_ACTION_NEEDED"
     READ_MAIL = "READ_MAIL"
+
+    def to_user_readable(self):
+        readable_mapping = {
+            self.DELETE_MAIL: "Mail loeschen",
+            self.ANSWER_MAIL: "Mail beantworten",
+            self.CREATE_MEETING: "Termin erstellen",
+            self.USER_ACTION_NEEDED: "Benutzer Aktion erforderlich",
+            self.READ_MAIL: "Email lesen"
+        }
+        return readable_mapping[self]

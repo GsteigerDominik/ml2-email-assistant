@@ -14,6 +14,19 @@ def indexPage():
     return send_file("static/index.html")
 
 
+@app.route('/parse-email', methods=['POST'])
+def parse_email():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+    if file:
+        response = conversation_handler.parse_email(file)
+        print({'response': response})
+        return jsonify({'response': response})
+
+
 @app.route('/upload-email', methods=['POST'])
 def upload_email():
     if 'file' not in request.files:
@@ -39,7 +52,8 @@ def send_message():
 @app.route("/clear", methods=['POST'])
 def clear():
     conversation_handler.__init__()
-    return  jsonify({'response': 'ok'})
+    return jsonify({'response': 'ok'})
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
