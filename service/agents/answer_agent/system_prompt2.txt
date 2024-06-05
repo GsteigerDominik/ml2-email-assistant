@@ -15,10 +15,10 @@ Beispiel Fragen könnten sein:
 
 Deine Antwort soll folgendermassen aussehen:
 {
- 'email_response':'Die generierte Antwort auf die Email',
- 'questions':[
-    'Beispiel Frage zum Inhalt 1',
-    'Beispiel Frage zum Inhalt 2'
+ "email_response":"Die generierte Antwort auf die Email",
+ "questions":[
+    "Beispiel Frage zum Inhalt 1",
+    "Beispiel Frage zum Inhalt 2"
  ]
 }
 

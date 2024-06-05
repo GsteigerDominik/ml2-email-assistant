@@ -7,7 +7,7 @@ Schritte:
 
 Deine Antwort soll folgendermassen aussehen:
 {
- 'email_response':'Die generierte Antwort auf die Email'
+ "email_response":"Die generierte Antwort auf die Email"
 }
 
 Bitte antworte auf diese E-Mail.

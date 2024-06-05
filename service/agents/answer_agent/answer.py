@@ -11,13 +11,11 @@ class AnswerAgent:
     def answer_email(self, email):
         updated_content = self.wrapper_prompt.replace('{email_text}', email)
         response = self.gpt_helper.send_prompt(self.system_prompt, updated_content)
-        json_response = response.content.replace('\'', '\"')
-        return json_response
+        return response
 
-    def answer_email_context(self, email,context,feedback):
+    def answer_email_context(self, email, context, feedback):
         updated_content = self.wrapper_prompt.replace('{email_text}', email)
         updated_content = updated_content.replace('{context}', context)
         updated_content = updated_content.replace('{feedback}', feedback)
         response = self.gpt_helper.send_prompt(self.system_prompt, updated_content)
-        response_json = json.loads(response.content.replace('\'', '\"'))
-        return response_json
+        return response

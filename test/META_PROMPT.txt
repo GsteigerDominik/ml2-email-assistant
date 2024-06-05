@@ -5,4 +5,4 @@ er soll verschiedene Emails im ".msg" format generieren um einen automatisierten
 - CREATE_MEETING (Im Mail sind Termininformationen vorhanden, welche zu einem Kalender eintrag führen sollen)
 - USER_ACTION_NEEDED (Aufgrund dieses emails muss der User handeln)
 - READ_MAIL (Das Mail ist rein Informativ und sollte gelesen werden)
-Er solle je 5 Dateien erstellen
+Er solle je 5 Dateien erstellen. Zudem soll er sowohl     Subject, Body, From.

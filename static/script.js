@@ -46,11 +46,15 @@ function appendMessage(sender, message) {
     messageElement.classList.add('message', sender);
     const contentElement = document.createElement('div');
     contentElement.classList.add('content');
+    console.log('HELLO', message)
     if (message['ACTION'] === "CREATE_MEETING") {
         contentElement.innerHTML = prepareHtmlForMeeting(message)
-    } else if(message['ACTION'] === "ANSWER_MAIL"){
+    } else if (message['ACTION'] === "ANSWER_MAIL") {
         contentElement.innerHTML = prepareHtmlForAnswer(message)
+    } else if (message['ACTION'] === "READ_MAIL") {
+        contentElement.innerHTML = prepareHtmlForRead(message)
     } else {
+
         contentElement.textContent = message;
     }
     messageElement.appendChild(contentElement);
@@ -64,7 +68,7 @@ function appendEmail(email_content) {
     messageElement.classList.add('message', 'user');
     const contentElement = document.createElement('div');
     contentElement.classList.add('content');
-    contentElement.innerHTML= `
+    contentElement.innerHTML = `
         <div style="font-family: Arial, sans-serif; line-height: 1.6;">
             <h2>Email</h2>
             <p><strong>Betreff:</strong> ${email_content.Subject}</p>
@@ -79,8 +83,18 @@ function appendEmail(email_content) {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
+function prepareHtmlForRead(message) {
+    const content = message['CONTENT'].map(item => `<p>${item}</p>`).join('');
+    return `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+            <h2>Zusammenfassung der Mail</h2>
+            <div>${content}</div>
+        </div>
+    `;
+}
+
 function prepareHtmlForMeeting(message) {
-    const content = JSON.parse(message['CONTENT']);
+    const content = message['CONTENT'];
     const startDate = new Date(`${content.Datum}T${content.Uhrzeit}:00`);
     const endDate = new Date(startDate.getTime() + 60 * 60 * 1000); // add one hour
 
@@ -132,8 +146,8 @@ function prepareHtmlForMeeting(message) {
 }
 
 function prepareHtmlForAnswer(message) {
-    console.log('HEY',message['CONTENT'])
-    const content = JSON.parse(message['CONTENT']);
+    console.log('HEY', message['CONTENT'])
+    const content = message['CONTENT'];
 
     return `
         <div style="font-family: Arial, sans-serif; line-height: 1.6;">
@@ -142,6 +156,7 @@ function prepareHtmlForAnswer(message) {
         </div>
     `;
 }
+
 function switchToChatInput() {
     document.getElementById('file-input').style.display = 'none';
     document.getElementById('message-input').style.display = 'block';
@@ -181,7 +196,7 @@ function sendMessage() {
     }
 }
 
-function clear(){
+function clear() {
     fetch('http://127.0.0.1:5000/clear', {
         method: 'POST',
         headers: {
@@ -190,7 +205,7 @@ function clear(){
         body: {}
     })
     const chatMessages = document.getElementById('chat-messages');
-    chatMessages.innerHTML=""
+    chatMessages.innerHTML = ""
     document.getElementById('file-input').style.display = 'block';
     document.getElementById('message-input').style.display = 'none';
     document.getElementById('send-button').addEventListener('click', handleFileUpload);

@@ -12,4 +12,4 @@ class MeetingAgent:
     def create_meeting_suggestion(self, email):
         updated_content = self.wrapper_prompt.replace('{email_text}', email)
         response = self.gpt_helper.send_prompt(self.system_prompt, updated_content)
-        return response.content
+        return response

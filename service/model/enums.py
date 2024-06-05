@@ -5,6 +5,7 @@ class State(Enum):
     INITIAL_STATE = 0
     EMAIL_RECEIVED = 1
     FINE_TUNING = 2
+    WRONG_CLASSIFICATION=3
 
 
 class Action(Enum):

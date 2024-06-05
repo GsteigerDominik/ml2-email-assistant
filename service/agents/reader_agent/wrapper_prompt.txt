@@ -1,0 +1,11 @@
+Input Email:
+{email_text}
+Output:
+[
+"Zusammenfassung des ersten Hauptpunkts.",
+"Zusammenfassung des zweiten Hauptpunkts.",
+"Zusammenfassung des dritten Hauptpunkts."
+]
+
+Falls nur ein Absatz vorhanden ist, nutze eine Liste mit einem Element.
+Nur die JSON-Antwort zurückgeben, ohne weiteren Kontext.

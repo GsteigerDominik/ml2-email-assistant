@@ -1,3 +1,4 @@
+import json
 import os
 
 from openai import OpenAI
@@ -16,4 +17,4 @@ class GptHelper:
                 {"role": "user", "content": user_content}
             ]
         )
-        return response.choices[0].message
+        return json.loads(response.choices[0].message.content)

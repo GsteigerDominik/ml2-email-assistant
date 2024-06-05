@@ -23,7 +23,6 @@ def parse_email():
         return jsonify({'error': 'No selected file'}), 400
     if file:
         response = conversation_handler.parse_email(file)
-        print({'response': response})
         return jsonify({'response': response})
 
 
@@ -45,6 +44,7 @@ def send_message():
     message = data.get('message', '')
     if message:
         response = conversation_handler.handle_user_input(message)
+        print('hey',response)
         return jsonify({'response': response})
     return jsonify({'error': 'No message provided'}), 400
 
