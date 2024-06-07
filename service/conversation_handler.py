@@ -3,6 +3,7 @@ from service.agents.classifier_agent.classifier import ClassifierAgent
 from service.agents.delete_agent.deleter import DeleteAgent
 from service.agents.meeting_agent.meeting import MeetingAgent
 from service.agents.reader_agent.reader import ReaderAgent
+from service.agents.useraction_agent.useraction import UserActionAgent
 from service.model.enums import *
 from service.utils.file_helper import FileHelper
 from service.utils.gpt_helper import GptHelper
@@ -22,6 +23,7 @@ class ConversationHandler:
         self.meeting_agent = MeetingAgent(self.file_helper, self.gpt_helper)
         self.answer_agent = AnswerAgent(self.file_helper, self.gpt_helper)
         self.reader_agent = ReaderAgent(self.file_helper, self.gpt_helper)
+        self.useraction_agent = UserActionAgent(self.file_helper, self.gpt_helper)
         self.delete_agent = DeleteAgent()
         self.state = State.INITIAL_STATE
         self.action = ""
@@ -70,5 +72,8 @@ class ConversationHandler:
             return create_action_content_json(Action.READ_MAIL, content)
         elif self.action == Action.DELETE_MAIL:
             content = self.delete_agent.delete_email()
-            create_action_content_json(Action.DELETE_MAIL, content)
-            return "Das Mail wird gelöscht."
+            return content
+        elif self.action == Action.USER_ACTION_NEEDED:
+            content = self.useraction_agent.extract_user_action(self.email_content)
+            return create_action_content_json(Action.USER_ACTION_NEEDED, content)
+

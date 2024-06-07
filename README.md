@@ -11,6 +11,7 @@ Semester: FS24
 3. Data Collection or Generation
 4. Modeling
 5. Interpretation and Validation
+6. Future work & expansions
 
 ## 1. Setup
 
@@ -67,7 +68,7 @@ During the concept phase, the project scope was defined as follows:
 
 ## 3. Data Collection or Generation
 
-n the use case of the email assistant, there are essentially two types of input data.
+In the use case of the email assistant, there are essentially two types of input data.
 First, there is the .msg file, which serves as the initial input to start the process.
 This file is then classified by the classifier.
 Second, there are various ways the user can interact with the assistant.
@@ -76,17 +77,69 @@ Second, there are various ways the user can interact with the assistant.
    To test the classifier, emails are needed.
    On one hand, personal or private emails can be used.
    On the other hand, dummy emails are generated in the test folder to ensure there is enough test data to fairly assess
-   the accuracy.
+   the accuracy. ```Generation in test/create_emails.py``` On default this python file creates 25 .msg files. But it can
+   easily be
+   scaled to a bigger amount. For this proof of concept 25 emails should be enough.
 2. <b>User Interaction:</b><br>
    User interaction is tested manually, and therefore, no data is generated or collected.
 
 ## 4. Modeling
 
+This chapter is all about how the projects modeling / code / prompt engineering works. Its divided into this 3
+subchapters:
+Agent concept, Conversation handler & State machine and varia
+
 ### 4.1 Agent concept
+
+Working with the full prompt in a python file was quite unsatisfying. Therefore, I created the "agent"-concept i will
+describe in this chapter.
+<br>
 Every agent consists out of 3 files. A system_prompt.txt file
 (containing the system prompt), a wrapper_prompt.txt file
-(containing the wrapper_prompt) and a python file. 
-### 4.2 State machine
+(containing the wrapper_prompt) and a python file.
+The system prompt is the prompt witch defines the task and the behaviour of the model. The wrapper prompt is where the
+user input gets inserted.
+While engineering this solution, i firstly had some issues that the model not always would give me the answer as a json,
+when only mentioned in the
+system prompt. When I added the json a second time at the end of the prompt (Ref: wrapper_prompts), i never had this
+issue again. Variables marked with { } (Example {feedback}) are used to insert conversation data into the prompt. 
+<br>
+So to conclude the "agent"-concept has the following advantages:
+
+- Structure: it gives a nice structure to the code, as you have a package with 3 files for every agent.
+- Prompt management: the prompts can easily be managed in txt files.
+
+### 4.2 Conversation handler & State machine
+
+The conversation handler is the heart of the application. It's the interface between the api-handler (app.py) and all
+the agents.
+It decides at witch time witch agent is needed.
+To handle the state of the conversation a small but effective state machine was implemented.
 ![State Machine](img/state_machine.png)
 
-## 5. Interpretation and Validation
+#### Further Development:
+
+Right now the conversation handler is only able to handle one conversation.
+Enabling a multi-user / multi-conversation management would be a next big step.
+
+## 5. Validation and Interpretation 
+To ensure a fair validation each component / agent is getting tested/validated separately in  this chapter. 
+
+### 5.1 Mail Classification
+
+Tested with automated test script. ```/test/classifier_test.py``` <br>
+Only tests classification of the emails.
+Additionally manual testing:<br>
+
+#### 5.1.2 Interpretation
+
+Automated test
+
+1. Classifier
+
+| TestObject | Testcase | Expected | Actual |
+|:----------:|:--------:|:--------:|:------:|
+| Classifier |    1     |   TBD    |  TBD   |
+|            |    1     |   TBD    |  TBD   |
+
+## 6. Possible future work & expansions

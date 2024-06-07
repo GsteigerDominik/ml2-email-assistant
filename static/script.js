@@ -46,13 +46,14 @@ function appendMessage(sender, message) {
     messageElement.classList.add('message', sender);
     const contentElement = document.createElement('div');
     contentElement.classList.add('content');
-    console.log('HELLO', message)
     if (message['ACTION'] === "CREATE_MEETING") {
         contentElement.innerHTML = prepareHtmlForMeeting(message)
     } else if (message['ACTION'] === "ANSWER_MAIL") {
         contentElement.innerHTML = prepareHtmlForAnswer(message)
     } else if (message['ACTION'] === "READ_MAIL") {
         contentElement.innerHTML = prepareHtmlForRead(message)
+    } else if (message['ACTION'] === "USER_ACTION_NEEDED") {
+        contentElement.innerHTML = prepareHtmlForAction(message)
     } else {
 
         contentElement.textContent = message;
@@ -88,6 +89,16 @@ function prepareHtmlForRead(message) {
     return `
         <div style="font-family: Arial, sans-serif; line-height: 1.6;">
             <h2>Zusammenfassung der Mail</h2>
+            <div>${content}</div>
+        </div>
+    `;
+}
+
+function prepareHtmlForAction(message) {
+    const content = message['CONTENT'].map(item => `<p>${item}</p>`).join('');
+    return `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+            <h2>Folgende Aktion sind notwendig:</h2>
             <div>${content}</div>
         </div>
     `;
@@ -146,7 +157,6 @@ function prepareHtmlForMeeting(message) {
 }
 
 function prepareHtmlForAnswer(message) {
-    console.log('HEY', message['CONTENT'])
     const content = message['CONTENT'];
 
     return `
@@ -204,8 +214,8 @@ function clear() {
         },
         body: {}
     })
-    const chatMessages = document.getElementById('chat-messages');
-    chatMessages.innerHTML = ""
+    document.getElementById('file-input').value = '';
+    document.getElementById('chat-messages').innerHTML = "";
     document.getElementById('file-input').style.display = 'block';
     document.getElementById('message-input').style.display = 'none';
     document.getElementById('send-button').addEventListener('click', handleFileUpload);

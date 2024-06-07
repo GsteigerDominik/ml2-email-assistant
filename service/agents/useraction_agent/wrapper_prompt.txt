@@ -1,0 +1,11 @@
+Input Email:
+{email_text}
+Output:
+["Erforderliche Aktion 1",
+"Erforderliche Aktion 2",
+"Erforderliche Aktion 3",
+...
+]
+
+Falls nur ein Absatz vorhanden ist, nutze eine Liste mit einem Element.
+Nur die JSON-Antwort zurückgeben, ohne weiteren Kontext.
