@@ -19,7 +19,7 @@ Semester: FS24<br>
 2. Setup local python environment (venv) with python version 3.10.0
 3. Install requirements <br/>
    ``` pip install -r requirements.txt```
-4. Create .env file with the following variable <br/>
+4. Adjust env variable in .env file <br/>
    Email Assistant uses GPT-3.5-Turbo. Use your own OPENAI_API_KEY or request a OPENAI_API_KEY per mail. <br/>
    ```OPENAI_API_KEY='REPLACEME'```
 5. Run app with ```python app.py``` or with ```flask run```

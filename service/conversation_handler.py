@@ -49,7 +49,7 @@ class ConversationHandler:
                 response = self.answer_agent.answer_email_context(self.email_content, self.context, message)
                 self.context += str(response)
                 return {'ACTION': Action.ANSWER_MAIL.name,
-                        'CONTENT': str(response)}
+                        'CONTENT': response}
 
         if self.state == State.WRONG_CLASSIFICATION:
             print(message)
@@ -57,7 +57,7 @@ class ConversationHandler:
     def handle_state_received(self, message):
         if message.lower() != 'ja':
             self.state = State.WRONG_CLASSIFICATION
-            return "I am sorry that i classified the email wrong. Please give me feedback"
+            return "Es tut mir leid dass ich das Email falsch klassifiziert habe. Bitte gib mir Feedback dass ich daraus lernen kann. (Not implemented yet!)"
 
         if self.action == Action.CREATE_MEETING:
             content = self.meeting_agent.create_meeting_suggestion(self.email_content)
@@ -76,4 +76,3 @@ class ConversationHandler:
         elif self.action == Action.USER_ACTION_NEEDED:
             content = self.useraction_agent.extract_user_action(self.email_content)
             return create_action_content_json(Action.USER_ACTION_NEEDED, content)
-
